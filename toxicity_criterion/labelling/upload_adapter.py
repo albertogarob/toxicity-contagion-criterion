@@ -1,10 +1,9 @@
 """Upload the GPT-OSS LoRA adapter to the HuggingFace Hub (optional; document-only).
 
 The adapter is fine-tuned on a **public** HuggingFace hate-speech corpus (not the Reddit data),
-so it is **not** subject to the Reddit-data ethics gate, and it is **not** required to reproduce
-the paper (the strata it produced are already shipped). Publishing it is a convenience; the
-fine-tune is reproducible by anyone from the released script + the public corpus. See the model
-card ``docs/MODEL_CARD_gptoss_lora.md``.
+and is **not** required to reproduce the paper (the strata it produced are already shipped).
+Publishing it is a convenience; the fine-tune is reproducible by anyone from the released script
++ the public corpus. See the model card ``docs/MODEL_CARD_gptoss_lora.md``.
 
 Prerequisites:
   * the trained adapter directory (from ``finetune_gptoss.py``; default save dir

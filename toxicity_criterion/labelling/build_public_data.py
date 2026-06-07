@@ -1,8 +1,8 @@
 """Build the public, PII-free release from the local private data (authors only).
 
 Produces everything the repository shares so the analyses reproduce **offline** (no Reddit
-calls) with **no comment text and no real usernames**. Run after the institutional ethics/DPO
-approval; outputs go under ``data/public/`` (committed).
+calls) with **no comment text and no real usernames**. Outputs go under ``data/public/``
+(committed).
 
 Outputs:
   data/public/corpus/toxic_comments.jsonl        id, author(pseudonym), type, parent_id, prediction

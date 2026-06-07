@@ -33,7 +33,7 @@ lancedb/
 data/raw/
 data/derived/
 #
-# PUBLIC release IS committed (ethics/DPO approved): data/public/ holds only
+# PUBLIC release IS committed: data/public/ holds only
 # anonymized, text-free derivatives , the anonymized corpus (pseudonym authors,
 # no text), the dehydrated id+label CSV, and PII-free validation artifacts
 # (panel labels, populations, human labels, and an anonymized validation key

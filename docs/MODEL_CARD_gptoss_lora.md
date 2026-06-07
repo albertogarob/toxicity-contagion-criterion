@@ -1,10 +1,9 @@
 # Model card , GPT-OSS 20B LoRA adapter (toxicity stratifier)
 
 > Draft model card to accompany the adapter (e.g. on HuggingFace Hub). Fill `[brackets]`.
-> The adapter is fine-tuned on a **public** hate-speech corpus (not the Reddit data), so its
-> release is **not** subject to the Reddit-data ethics gate. It is also **not required to
-> reproduce the paper's results** (the validation strata it produced are already shipped in
-> `data/public/validation/validation_key.csv`, and the deployed labels are Sonnet's).
+> The adapter is fine-tuned on a **public** hate-speech corpus (not the Reddit data). It is
+> **not required to reproduce the paper's results** (the validation strata it produced are already
+> shipped in `data/public/validation/validation_key.csv`, and the deployed labels are Sonnet's).
 
 ## Summary
 - **Model:** LoRA adapter for `openai/gpt-oss-20b`, fine-tuned for binary toxic / non-toxic
