@@ -1,12 +1,15 @@
 # Testing for Toxicity Contagion Before Applying Network Amplifier-Ranking Methods: A UK Reddit Case Study
 
 > **Data availability (update).** At the time of submission, the submission form indicated that
-> data was not available; this is no longer the case. The data required to reproduce all reported
-> results is now provided in this repository: an anonymized corpus (pseudonymized author
-> identifiers, no comment text), a dehydrated identifier-and-label file, and the PII-free
-> validation artifacts. Consequently, every table and figure can be reproduced offline via
-> `make reproduce`, with no Reddit access, API key, or GPU required. The raw comment text and the
-> original usernames are not redistributed. See the
+> data was not available; this is no longer the case. The data required to reproduce the reported
+> results is now provided in this repository as anonymized, text-free derivatives: an anonymized
+> corpus (pseudonymized author identifiers, no comment text), a dehydrated identifier-and-label
+> file, and the PII-free validation artifacts. From these, every table and figure can be
+> regenerated with `make reproduce`. The raw comment text and the original usernames are not
+> redistributed; they can optionally be recovered with the included rehydration script (which
+> queries Reddit). The upstream stages (collection, LLM labelling, and the GPT-OSS fine-tune) are
+> released as documented code and do require Reddit access, provider API keys, and a GPU
+> respectively, but they are not needed to reproduce the reported results. See the
 > [Data](#data--anonymized--dehydrated-release) section and [`DATA_RELEASE.md`](DATA_RELEASE.md).
 
 Reproducibility repository for the paper submitted to the **IEEE ICDM 2026 Applied Track**.
@@ -66,8 +69,9 @@ uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -e ".[de
 ```
 
 The analyses are deterministic (`SEED = 42`, `PYTHONHASHSEED = 0`; the Makefile sets the hash
-seed) and run **on CPU in minutes** from the committed anonymized data. **No API key, GPU, or
-Reddit access is needed.**
+seed) and run **on CPU in minutes** from the committed anonymized data. **Reproducing the
+reported results needs no API key, GPU, or Reddit access** (those are only needed for the upstream
+collection / labelling / fine-tune stages, which are not required here).
 
 ```bash
 make reproduce      # run every analysis that produces the paper's tables -> results/
