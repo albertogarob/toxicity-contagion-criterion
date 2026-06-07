@@ -1,41 +1,45 @@
 # Data
 
-## Status: withheld pending institutional approval
+The repository ships **anonymized, text-free** data sufficient to reproduce every result
+**offline**. No comment text and no real usernames are published. See `../DATA_RELEASE.md` for
+the full policy and ethics statement.
 
-**Nothing under `data/` is shared in this repository except this README.** No comment text, no
-usernames, no comment IDs, and not even a dehydrated id+label file.
-
-Three coauthors are based at a university in the Netherlands, so any release of data derived from
-the Reddit corpus is subject to the GDPR / Dutch UAVG and must first be approved by the
-university privacy officer (FG/DPO) and research-ethics committee (with a DPIA / Data Management
-Plan as required). A dehydrated id+label file is re-identifiable on rehydration and therefore
-still personal data, so it is gated too. See `../DATA_RELEASE.md`.
-
-## Local layout (gitignored; authors only)
-
-When the corpus is present on a machine, it lives here:
+## Committed (public, PII-free)
 
 ```
-data/
-├── raw/reddit/        raw scraped corpus (text + usernames)
-├── derived/           Sonnet label files + validation intermediates
-│   ├── toxic_comments_sonnet.jsonl
-│   ├── non_toxic_comments_sonnet.jsonl
-│   └── validation/    validation_key.csv, human_labels.csv
-└── public/            the *would-be* public artifacts (still gitignored for now)
-    ├── corpus_dehydrated.csv          id, parent_id, subreddit, sonnet_label
-    └── validation/    panel_{opus,gpt,gemini}.csv, validation_populations.json
+data/public/
+├── corpus/
+│   ├── toxic_comments.jsonl        id, author (pseudonym), type, parent_id, prediction   (no text)
+│   ├── non_toxic_comments.jsonl    (same)
+│   └── raw/<subreddit>_dataset.jsonl   id, author (pseudonym), type, parent_id           (no text)
+├── corpus_dehydrated.csv           id, parent_id, subreddit, sonnet_label
+└── validation/
+    ├── panel_{opus,gpt,gemini}.csv  sample_id + label
+    ├── validation_populations.json  strata sizes + seed
+    ├── human_labels.csv             sample_id, human_label
+    └── validation_key.csv           sample_id, stratum, subreddit, gpt_label, sonnet_label  (anonymized)
 ```
 
-All of these are excluded by `.gitignore`.
+Usernames are replaced by stable pseudonyms via a deterministic bijection, so the reply graph is
+isomorphic to the real one and every reported number reproduces **identically**. The
+username↔pseudonym map and the real `orig_id`/`author` are **not** published. Regenerate the
+public release from private sources with `python -m toxicity_criterion.labelling.build_public_data`.
 
-## Planned release on approval (order of increasing exposure)
+## Withheld (private; gitignored; never committed)
 
-1. `public/validation/panel_*.csv` + `validation_populations.json` , PII-free (sample_id + labels).
-2. `public/corpus_dehydrated.csv` , dehydrated corpus; reconstruct text locally with
-   `make rehydrate` (re-fetches by ID from Reddit's public .json endpoints; respects deletions).
-3. Full hydrated set (text + usernames) , by gated/dedicated access only; never committed.
+```
+data/raw/reddit/*_dataset.jsonl          raw comment text + real usernames
+data/derived/*_sonnet.jsonl              Sonnet labels with real text + usernames
+data/derived/validation/validation_key.csv   real re-identification key (orig_id, author)
+```
 
-The dehydration / rehydration code (`../toxicity_criterion/labelling/build_dehydrated.py`,
-`rehydrate.py`) is already in place; enabling a release is a matter of un-ignoring the relevant
-paths once approval is granted.
+## Recovering the real text (optional)
+
+Reproduction does **not** need it, but to work with the actual comments:
+
+```bash
+uv pip install -e ".[labelling]"   # rehydration needs `requests`
+make rehydrate                     # re-fetch text by ID from Reddit's public .json endpoints -> data/derived/ + data/raw/
+```
+
+Rehydration respects deletions (removed comments cannot be recovered).

@@ -86,9 +86,9 @@ def run(dehydrated_path: str = DEHYDRATED, delay: float = 2.0) -> dict:
     print()
 
     os.makedirs(config.DERIVED_DIR, exist_ok=True)
-    os.makedirs(config.RAW_DIR, exist_ok=True)
-    tox_f = open(config.SONNET_TOXIC, "w", encoding="utf-8")
-    non_f = open(config.SONNET_NONTOXIC, "w", encoding="utf-8")
+    os.makedirs(config.RAW_PRIVATE_DIR, exist_ok=True)
+    tox_f = open(config.SONNET_TOXIC_PRIVATE, "w", encoding="utf-8")
+    non_f = open(config.SONNET_NONTOXIC_PRIVATE, "w", encoding="utf-8")
     raw_files: dict[str, object] = {}
     n_missing = 0
     try:
@@ -104,7 +104,7 @@ def run(dehydrated_path: str = DEHYDRATED, delay: float = 2.0) -> dict:
             if sub:
                 if sub not in raw_files:
                     raw_files[sub] = open(
-                        os.path.join(config.RAW_DIR, f"{sub}_dataset.jsonl"), "w", encoding="utf-8"
+                        os.path.join(config.RAW_PRIVATE_DIR, f"{sub}_dataset.jsonl"), "w", encoding="utf-8"
                     )
                 raw_files[sub].write(json.dumps(rec, ensure_ascii=False) + "\n")
             # derived sonnet (with label)

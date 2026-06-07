@@ -43,7 +43,7 @@ toxicity_criterion/            installable package
 ├── labelling/                 Stage 2/3 labelling + fine-tune (API/GPU; document-only)
 ├── scraping/                  Stage 1 Reddit collection (document-only)
 └── cli.py                     console entrypoints
-data/        corpus data , withheld pending institutional approval (gitignored), see data/README.md
+data/public/ committed anonymized + dehydrated data (no text/usernames); data/raw + data/derived gitignored
 docs/        methodology docs       figures/  results/     tests/  regression suite
 pyproject.toml  Makefile  requirements.txt
 ```
@@ -57,8 +57,8 @@ uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -e ".[de
 ```
 
 The analyses are deterministic (`SEED = 42`, `PYTHONHASHSEED = 0`; the Makefile sets the hash
-seed) and run **on CPU in minutes** once the corpus is present locally. No API key or GPU is
-needed for the analyses themselves.
+seed) and run **on CPU in minutes** from the committed anonymized data. **No API key, GPU, or
+Reddit access is needed.**
 
 ```bash
 make reproduce      # run every analysis that produces the paper's tables -> results/
@@ -67,23 +67,23 @@ make test           # regression tests that lock the paper's numbers
 make lint           # ruff + black --check
 ```
 
-## Data , not shared yet (pending institutional approval)
+## Data , anonymized + dehydrated release
 
-**No corpus data is shared in this repository at this time** , not even a dehydrated, text-free
-id+label file. Three coauthors are at a university in the Netherlands, so any data release
-(including dehydrated IDs, which remain re-identifiable on rehydration and so are personal data
-under the GDPR) must first be cleared by the university privacy officer (FG/DPO) and
-research-ethics committee. Until then the repo ships only code, aggregate `results/*.json`, and
-the anonymized figures.
+The repository ships the data needed to **reproduce every result offline** while publishing
+**no comment text and no real usernames** (cleared by the Netherlands coauthors' institutional
+ethics/DPO review):
 
-The sharing **mechanism is already built** and will be enabled on approval: a dehydrated dataset
-(`build_dehydrated.py` -> `data/public/corpus_dehydrated.csv`) plus a rehydration script
-(`make rehydrate`) that re-fetches text by ID from Reddit's public `.json` endpoints and honours deletions. See
-[`DATA_RELEASE.md`](DATA_RELEASE.md) (availability + ethics) and [`data/README.md`](data/README.md).
+- **Anonymized corpus** (`data/public/corpus/`): `id, parent_id, subreddit, pseudonym-author,
+  label` , no text. A deterministic username bijection makes the reply graph isomorphic to the
+  real one, so results reproduce **identically**.
+- **Dehydrated corpus** (`data/public/corpus_dehydrated.csv`): `id, parent_id, subreddit, label`,
+  for recovering the real text via `make rehydrate` (optional; not needed for reproduction).
+- **Validation** (`data/public/validation/`): panel + human labels, populations, and an
+  **anonymized** key (`sample_id, stratum`; the real `orig_id`/`author` are withheld).
 
-> Reproducing the tables therefore currently requires access to the corpus from the authors
-> (under the institutional approval / PC confidentiality). The committed `results/*.json` provide
-> the reference values, and `tests/` assert them.
+Withheld (private, gitignored): the raw comment **text** and **real usernames**
+(`data/raw/`, `data/derived/`). See [`DATA_RELEASE.md`](DATA_RELEASE.md) (availability + ethics)
+and [`data/README.md`](data/README.md).
 
 ## Reproducing the paper's results
 

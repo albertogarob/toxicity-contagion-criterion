@@ -1,0 +1,19 @@
+{
+  "seed": 42,
+  "cell_populations": {
+    "agree_tox": 185,
+    "gpt_tox_son_non": 2683,
+    "gpt_non_son_tox": 330,
+    "agree_non": 20388
+  },
+  "n_overlap": 23586,
+  "n_corpus_eligible": 35176,
+  "sample_allocation": {
+    "agree_tox": 45,
+    "gpt_tox_son_non": 55,
+    "gpt_non_son_tox": 45,
+    "agree_non": 30,
+    "random": 25
+  },
+  "note": "cells partition the GPT-OSS/Sonnet overlap; random drawn from full corpus"
+}

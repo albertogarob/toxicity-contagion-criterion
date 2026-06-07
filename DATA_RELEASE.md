@@ -1,96 +1,81 @@
 # Data availability statement
 
 This document is the repository's answer to **ML Reproducibility Checklist v2.0, item 9**
-(downloadable dataset / simulation environment). It states what is shared, what is withheld, and
-why.
+(downloadable dataset / simulation environment).
 
-## Status: data withheld pending institutional approval
+## Status: approved , anonymized + dehydrated data released
 
-At this time the repository shares **no corpus data , not even the dehydrated id+label file.**
+The institutional review (the Netherlands coauthors' university privacy officer / DPO and
+research-ethics committee) **cleared** sharing the anonymized and dehydrated data and the
+derivative artifacts. The repository now ships everything needed to **reproduce every result
+offline (no Reddit calls)**, while publishing **no comment text and no real usernames**.
 
-Three coauthors are based at a university in the Netherlands, so the project is subject to the
-EU **GDPR** / Dutch **UAVG** and the university's research-data governance. Sharing any data
-derived from the Reddit corpus (including a dehydrated, text-free id+label file, which remains
-*re-identifiable* on rehydration and therefore personal data under the GDPR) must first be
-cleared by the university **privacy officer (FG/DPO)** and **research-ethics committee**, with a
-DPIA and Data Management Plan as required. Until that approval is in place, only code, aggregate
-results, and anonymized figures are published.
+We still do **not** redistribute the raw comment **text** or **real usernames** (Reddit's terms
++ privacy). The corpus was collected by querying Reddit's public per-subreddit `.json` web
+endpoints (not the official Data API); the released artifacts contain neither text nor usernames.
 
-The discourse studied (immigration) can touch **special-category data** (Art. 9), which is the
-main reason the release is gated rather than automatic.
+## What IS shared (committed, PII-free)
 
-## What IS shared now
-
-| Shared | Where |
-|---|---|
-| All analysis / criterion / figure code | `toxicity_criterion/` |
-| Scraping, labelling, dehydration + rehydration code | `toxicity_criterion/scraping/`, `toxicity_criterion/labelling/` |
-| Aggregate result tables (no personal data) | `results/*.json` |
-| Generated figures (anonymized reply structures; no text/usernames; same as in the paper) | `figures/*.pdf` |
-| Generative simulation (positive control; code-only, no data) | `toxicity_criterion/criterion/disattenuation.py`, `toxicity_criterion/figures/positive_control.py` |
-| Documentation | `docs/`, `data/README.md` |
-
-No usernames, no comment text, and no comment IDs are published.
-
-## What is WITHHELD now (and the planned release on approval)
-
-Nothing under `data/` is committed except `data/README.md` (see `.gitignore`). The machinery to
-release data is already in place; on ethics/DPO approval it can be published in order of
-increasing exposure by un-ignoring the relevant paths:
-
-| Withheld | Sensitivity | Release mechanism (on approval) |
+| Released | Path | Contents |
 |---|---|---|
-| `data/public/validation/panel_*.csv`, `validation_populations.json` | PII-free (sample_id + labels) | commit directly |
-| `data/public/corpus_dehydrated.csv` (id, parent_id, subreddit, label) | dehydrated; re-identifiable on rehydration | commit + ship `rehydrate.py` |
-| `data/derived/*`, `data/raw/*` (text + usernames) | full PII | gated/dedicated access only; never committed |
+| **Anonymized corpus** | `data/public/corpus/{toxic,non_toxic}_comments.jsonl` | `id, author (pseudonym), type, parent_id, prediction` , **no text** |
+| Anonymized per-subreddit files | `data/public/corpus/raw/<sub>_dataset.jsonl` | `id, author (pseudonym), type, parent_id` , **no text** |
+| **Dehydrated corpus** | `data/public/corpus_dehydrated.csv` | `id, parent_id, subreddit, sonnet_label` |
+| Silver-panel labels | `data/public/validation/panel_{opus,gpt,gemini}.csv` | `sample_id` + label |
+| Validation populations | `data/public/validation/validation_populations.json` | strata sizes + seed |
+| Human labels | `data/public/validation/human_labels.csv` | `sample_id, human_label` |
+| **Anonymized** validation key | `data/public/validation/validation_key.csv` | `sample_id, stratum, subreddit, gpt_label, sonnet_label` (drops `orig_id` + `author`) |
+| Code, aggregate results, figures | `toxicity_criterion/`, `results/*.json`, `figures/*.pdf` | , |
 
-## The prepared sharing mechanism (dehydration / rehydration)
-
-When approved, the intended public form is a **dehydrated** dataset (comment IDs + reply
-structure + toxic/non-toxic labels, no text, no usernames), reconstructed locally from Reddit's public
-`.json` endpoints:
+Reproduce with no Reddit access:
 
 ```bash
-# AUTHORS, once approved: build the dehydrated file (PII-free) and un-ignore it
-python -m toxicity_criterion.labelling.build_dehydrated   # -> data/public/corpus_dehydrated.csv
-
-# ANYONE, once the dehydrated file is published:
-uv pip install -e ".[labelling]"
-make rehydrate     # re-fetch text by ID -> data/derived/ + data/raw/
-make reproduce
+make setup
+make reproduce     # Tables I-III + criterion, from the anonymized corpus
+make figures
+make test
 ```
 
-This approach minimises data, respects deletions (removed comments do not rehydrate), and ships
-no text or usernames. The dehydrate -> rehydrate round-trip is validated to reconstruct the
-corpus exactly when no comments have been deleted (619 toxic / 34,557 non-toxic recovered
-identically). Comments deleted since collection cannot be re-fetched; their structure + label are
-preserved but text/author are unavailable, which can cause slight drift in graph-based results
-(Tables II–III); the criterion (Table I) is robust.
+### Anonymization (why results are identical)
+A deterministic bijection maps each real username to a stable pseudonym (`u00001`...), applied
+consistently across the corpus and per-subreddit files; sentinel authors (`[deleted]`, etc.) are
+left unchanged. The reply graph is therefore **isomorphic** to the real one, so every reported
+number reproduces **identically**. The username↔pseudonym map is **not** published. Comment text
+is dropped entirely (no analysis uses it). Regenerate the public release from private sources with
+`python -m toxicity_criterion.labelling.build_public_data`.
 
-## Reviewers
+## What is WITHHELD (private; gitignored)
 
-To verify the headline results before any public data release, the authors can provide access to
-the necessary files under the program committee's confidentiality terms and within the
-institutional approval. The committed `results/*.json` give the reference values the analyses
-produce.
+| Withheld | Why | How to obtain |
+|---|---|---|
+| Raw comment **text** (`data/raw/`) | Reddit terms + privacy | `make rehydrate` re-fetches by ID from Reddit's public `.json` endpoints |
+| Real **usernames** (`data/derived/*_sonnet.jsonl`) | personal data | recovered into your local copy by rehydration; never shipped by us |
+| Real re-identification key (`orig_id`/`author` in the validation key) | links `sample_id` -> a person | not released |
 
-## Correction to earlier project notes
+## Optional: recover the real text (rehydration)
+Not needed for reproduction (the anonymized corpus already reproduces everything). To work with
+the actual comment text:
 
-The raw/derived files retained on the authors' machines contain **real usernames** (they are
-*not* anonymized at collection). This is precisely why they are withheld.
+```bash
+uv pip install -e ".[labelling]"
+make rehydrate     # re-fetch text by ID -> data/derived/ + data/raw/ (real text + usernames, local only)
+```
+
+Rehydration **respects deletions** (removed comments are not recoverable), so it cannot resurrect
+content a user has since deleted; this is a deliberate privacy property.
 
 ## Ethics statement
 
-Should the dehydrated dataset be released after approval, it would attach a `toxic`/`non-toxic`
-label to re-fetchable comment IDs. We note:
+The released data attaches a `toxic`/`non-toxic` label to (pseudonymous) public comments.
 
 - **Public, comment-level data.** Labels describe individual public comments, not persons, and
-  carry no demographic or identity attributes. No usernames would be published.
+  carry no demographic or identity attributes. No usernames are published.
 - **Automated labels are imperfect.** The Sonnet labels are model predictions (measured
-  precision ~ 0.92, recall reported as a range), not ground truth, and should not be treated as
+  precision ~ 0.92, recall reported as a range), not ground truth, and must not be treated as
   authoritative judgements about any individual. See `docs/ANNOTATION_GUIDELINES.md`.
 - **Right to erasure.** Rehydration respects deletions; a removed comment cannot be recovered.
-- **Takedown.** Authors will remove specific IDs from any released file on a reasonable request.
+- **Takedown.** The authors will remove specific IDs from the released files on a reasonable
+  request: [contact].
 - **Intended use.** Research on moderation methodology only; not for profiling, enforcement
   against individuals, or any use that re-identifies or targets users.
 
@@ -98,4 +83,4 @@ label to re-fetchable comment IDs. We note:
 
 All reported numbers use `SEED = 42` and `PYTHONHASHSEED = 0`; permutation null `B = 300`;
 recall degradation 20 perturbations × 6 fractions; influence maximization mean over 5 runs
-(`R = 200`). With the corpus reconstructed, the same inputs reproduce the same outputs.
+(`R = 200`). The same inputs reproduce the same outputs.

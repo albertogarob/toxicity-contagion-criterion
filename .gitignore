@@ -27,32 +27,17 @@ lancedb/
 .tmp/
 
 # ---------------------------------------------------------------------------
-# Data , NOTHING under data/ is shared at this time.
+# Data
 #
-# Per the Dutch coauthors' institutional requirement, NO corpus data is released
-# (not even the dehydrated id+label file) until the university privacy officer
-# (FG/DPO) and research-ethics committee approve. The dehydration + rehydration
-# machinery (toxicity_criterion/labelling/build_dehydrated.py and rehydrate.py)
-# is in place so the data can be published on approval by un-ignoring the
-# relevant paths below. See data/README.md and DATA_RELEASE.md.
-# ---------------------------------------------------------------------------
+# PRIVATE source (real comment text + real usernames) is NEVER committed:
 data/raw/
 data/derived/
-data/public/
-
-# Belt-and-braces: never commit corpus/label artifacts wherever staged.
-data/**/*.jsonl
-data/**/*.csv
-data/**/*_dataset.jsonl
-
-# ---------------------------------------------------------------------------
-# Committed on purpose (no personal data):
-#   data/README.md
-#   results/*.json   (aggregate result tables)
-#   figures/*.pdf , figures/*.mmd   (anonymized / synthetic)
 #
-# On ethics approval, release by un-ignoring (in order of increasing exposure):
-#   data/public/validation/panel_*.csv + validation_populations.json   (PII-free)
-#   data/public/corpus_dehydrated.csv                                  (dehydrated)
-#   (full hydrated set: by gated/dedicated access, not committed here)
+# PUBLIC release IS committed (ethics/DPO approved): data/public/ holds only
+# anonymized, text-free derivatives , the anonymized corpus (pseudonym authors,
+# no text), the dehydrated id+label CSV, and PII-free validation artifacts
+# (panel labels, populations, human labels, and an anonymized validation key
+# that drops orig_id/author). Regenerate with build_public_data.py.
+# See data/README.md and DATA_RELEASE.md.
+# ---------------------------------------------------------------------------
 # ---------------------------------------------------------------------------
