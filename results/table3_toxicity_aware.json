@@ -1,0 +1,76 @@
+{
+  "ToxicCount": {
+    "direct": 2.2,
+    "downstream": 2.3,
+    "elicit_pct": 7.3,
+    "subtree_pct": 7.1,
+    "n_rate": 8
+  },
+  "Volume": {
+    "direct": 2.6,
+    "downstream": 2.9,
+    "elicit_pct": 6.2,
+    "subtree_pct": 5.9,
+    "n_rate": 10
+  },
+  "WtdDegree(blind)": {
+    "direct": 1.3,
+    "downstream": 1.6,
+    "elicit_pct": 3.6,
+    "subtree_pct": 3.3,
+    "n_rate": 10
+  },
+  "Betweenness(blind)": {
+    "direct": 1.3,
+    "downstream": 1.6,
+    "elicit_pct": 4.5,
+    "subtree_pct": 3.4,
+    "n_rate": 10
+  },
+  "Closeness(blind)": {
+    "direct": 0.9,
+    "downstream": 1,
+    "elicit_pct": 4.5,
+    "subtree_pct": 3.9,
+    "n_rate": 10
+  },
+  "ToxDegree": {
+    "direct": 3.1,
+    "downstream": 4.7,
+    "elicit_pct": 12.2,
+    "subtree_pct": 11.5,
+    "n_rate": 10
+  },
+  "ToxPPR": {
+    "direct": 2.5,
+    "downstream": 4,
+    "elicit_pct": 11.1,
+    "subtree_pct": 10.4,
+    "n_rate": 7
+  },
+  "ToxSub-PR": {
+    "direct": 2.6,
+    "downstream": 2.6,
+    "elicit_pct": 16.4,
+    "subtree_pct": 14.2,
+    "n_rate": 7
+  },
+  "ToxSub-Btw": {
+    "direct": 2.4,
+    "downstream": 2.6,
+    "elicit_pct": 7.7,
+    "subtree_pct": 6.7,
+    "n_rate": 10
+  },
+  "ToxSub-Clo": {
+    "direct": 0.7,
+    "downstream": 0.7,
+    "elicit_pct": 3.1,
+    "subtree_pct": 2.4,
+    "n_rate": 6
+  },
+  "_base": {
+    "elicit_pct": 1.8,
+    "subtree_pct": 1.9
+  }
+}

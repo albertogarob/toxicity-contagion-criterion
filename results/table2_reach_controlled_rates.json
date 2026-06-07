@@ -1,0 +1,67 @@
+{
+  "config": {
+    "MIN_DIRECT": 5,
+    "MIN_DESC": 5,
+    "R": 200
+  },
+  "results": {
+    "ReplyBreadth": {
+      "elicit_rate": 0.036,
+      "elicit_n": 10,
+      "subtree_rate": 0.034,
+      "subtree_n": 10
+    },
+    "WtdDegree": {
+      "elicit_rate": 0.036,
+      "elicit_n": 10,
+      "subtree_rate": 0.033,
+      "subtree_n": 10
+    },
+    "Closeness": {
+      "elicit_rate": 0.045,
+      "elicit_n": 10,
+      "subtree_rate": 0.039,
+      "subtree_n": 10
+    },
+    "Betweenness": {
+      "elicit_rate": 0.045,
+      "elicit_n": 10,
+      "subtree_rate": 0.034,
+      "subtree_n": 10
+    },
+    "PageRank": {
+      "elicit_rate": 0.043,
+      "elicit_n": 10,
+      "subtree_rate": 0.036,
+      "subtree_n": 10
+    },
+    "ToxicCount": {
+      "elicit_rate": 0.073,
+      "elicit_n": 8,
+      "subtree_rate": 0.071,
+      "subtree_n": 8
+    },
+    "Volume": {
+      "elicit_rate": 0.062,
+      "elicit_n": 10,
+      "subtree_rate": 0.059,
+      "subtree_n": 10
+    },
+    "IM": {
+      "elicit_rate": 0.029,
+      "elicit_std": 0.004,
+      "subtree_rate": 0.031,
+      "subtree_std": 0.004
+    },
+    "Random(toxic)": {
+      "elicit_rate": 0.036,
+      "elicit_std": 0.045,
+      "subtree_rate": 0.03,
+      "subtree_std": 0.036
+    },
+    "_base": {
+      "elicit_rate": 0.018,
+      "subtree_rate": 0.019
+    }
+  }
+}

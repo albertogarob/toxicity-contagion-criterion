@@ -1,0 +1,19 @@
+# Core dependencies to reproduce the paper's tables and figures (CPU only).
+# Install with uv:  uv pip install -r requirements.txt
+# Versions are those used to produce the reported results (Python 3.12).
+networkx==3.6.1
+numpy==2.4.6
+scipy==1.17.1
+matplotlib==3.10.9
+
+# --- Optional: API/GPU stages (document-only; not needed for the headline results) ---
+# Labelling + LLM silver panel (Stage 2 / Stage 3): requires API keys in .env
+#   anthropic>=0.105
+#   openai>=2.4
+#   google-genai>=2.8
+# GPT-OSS 20B LoRA fine-tune (Stage 2, stratifier only): requires a GPU
+#   torch
+#   transformers
+#   peft
+#   trl
+#   datasets

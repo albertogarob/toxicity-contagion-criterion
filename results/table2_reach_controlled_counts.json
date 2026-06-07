@@ -1,0 +1,49 @@
+{
+  "config": {
+    "R": 200,
+    "N_MC": 5,
+    "top_k": 10
+  },
+  "results": {
+    "IM": {
+      "direct_sum": 12,
+      "direct_mean": 1.2,
+      "subtree_sum": 17,
+      "subtree_mean": 1.7
+    },
+    "ReplyBreadth": {
+      "direct_sum": 7,
+      "direct_mean": 0.7,
+      "subtree_sum": 11,
+      "subtree_mean": 1.1
+    },
+    "WtdDegree": {
+      "direct_sum": 7,
+      "direct_mean": 0.7,
+      "subtree_sum": 11,
+      "subtree_mean": 1.1
+    },
+    "PageRank": {
+      "direct_sum": 13,
+      "direct_mean": 1.3,
+      "subtree_sum": 15,
+      "subtree_mean": 1.5
+    },
+    "ToxicCount": {
+      "direct_sum": 22,
+      "direct_mean": 2.2,
+      "subtree_sum": 23,
+      "subtree_mean": 2.3
+    },
+    "Volume": {
+      "direct_sum": 2,
+      "direct_mean": 0.2,
+      "subtree_sum": 4,
+      "subtree_mean": 0.4
+    },
+    "Random(toxic-cand)": {
+      "direct_mean": 0.11,
+      "subtree_mean": 0.15
+    }
+  }
+}

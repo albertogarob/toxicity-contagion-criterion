@@ -1,0 +1,34 @@
+flowchart TD
+    subgraph IN[Inputs]
+        F[Reply forest]
+        L[LLM toxic / non-toxic labels]
+        PR["Classifier (precision, recall)"]
+    end
+
+    F --> S1
+    L --> S1
+    S1["<b>Step 1: Local effect?</b><br/>Parent-to-child assortativity<br/>Conditional relative risk<br/>Tested against a permutation null"]
+
+    PR --> S2
+    S1 --> S2
+    S2["<b>Step 2: True effect &gt; small?</b><br/>Disattenuate for classifier error<br/>Closed-form kappa + generative sweep"]
+
+    S2 --> S3
+    F --> S3
+    S3["<b>Step 3: Aggregates into cascades?</b><br/>Largest toxic component (cluster size)<br/>Longest toxic chain (cascade depth)<br/>Tested against the null"]
+
+    S3 --> D{"<b>Decision rule</b>"}
+    D -->|"Small &amp; non-aggregating"| R1["Rank by producer-count;<br/>Network methods add little"]
+    D -->|"Strong &amp; cascading"| R2["Network / diffusion methods<br/>may be warranted"]
+
+    PC["<b>Positive control</b><br/>Synthetically introduce a known contagion<br/>on the real forest, corrupt at the measured<br/>error rate: the criterion must detect it"]
+    PC -.Validates discrimination.-> S3
+
+    classDef step fill:#eef4fb,stroke:#2c6fb3,stroke-width:1.2px,color:#10283f;
+    classDef io fill:#f5f5f5,stroke:#888,stroke-width:1px,color:#222;
+    classDef dec fill:#fdf3e7,stroke:#d08a2e,stroke-width:1.2px,color:#5a3a12;
+    classDef ctrl fill:#eef9ee,stroke:#4a9a4a,stroke-width:1px,color:#1d401d;
+    class S1,S2,S3 step;
+    class F,L,PR,R1,R2 io;
+    class D dec;
+    class PC ctrl;

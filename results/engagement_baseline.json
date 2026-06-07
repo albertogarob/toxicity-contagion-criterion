@@ -1,0 +1,35 @@
+{
+  "corpus": {
+    "records": 35176,
+    "toxic": 619,
+    "non_toxic": 34557,
+    "base_rate": 0.0176
+  },
+  "engagement_proxy_reply_count": {
+    "toxic_parents": {
+      "n": 619,
+      "mean": 0.52,
+      "median": 0,
+      "p90": 1,
+      "max": 8,
+      "frac_with_>=1_reply": 0.375
+    },
+    "nontoxic_parents": {
+      "n": 34557,
+      "mean": 0.432,
+      "median": 0,
+      "p90": 1,
+      "max": 18,
+      "frac_with_>=1_reply": 0.34
+    },
+    "note": "Yousefi-style ReplyCount component; higher = more 'contagious' by their metric"
+  },
+  "structural_transmission": {
+    "P(reply_toxic|parent_toxic)": 0.059,
+    "P(reply_toxic|parent_nontoxic)": 0.017,
+    "base_rate_toxic": 0.0176,
+    "risk_ratio_reply_level": 3.471,
+    "toxic_comments_isolated": 582,
+    "frac_toxic_isolated": 0.9402
+  }
+}

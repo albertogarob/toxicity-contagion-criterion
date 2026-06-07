@@ -1,0 +1,62 @@
+{
+  "ToxicCount": {
+    "direct": 2.2,
+    "downstream": 2.3,
+    "elicit_pct": 7.3,
+    "subtree_pct": 7.1,
+    "n_rate": 8
+  },
+  "Volume": {
+    "direct": 2.6,
+    "downstream": 2.9,
+    "elicit_pct": 6.2,
+    "subtree_pct": 5.9,
+    "n_rate": 10
+  },
+  "PPR-clean": {
+    "direct": 2.4,
+    "downstream": 3.9,
+    "elicit_pct": 10.4,
+    "subtree_pct": 9.6,
+    "n_rate": 7
+  },
+  "NbrToxIn": {
+    "direct": 2.8,
+    "downstream": 4.4,
+    "elicit_pct": 8.7,
+    "subtree_pct": 7.7,
+    "n_rate": 10
+  },
+  "NbrToxOut": {
+    "direct": 2.8,
+    "downstream": 4.4,
+    "elicit_pct": 9.4,
+    "subtree_pct": 8.2,
+    "n_rate": 9
+  },
+  "DiffuseTC": {
+    "direct": 3,
+    "downstream": 4.7,
+    "elicit_pct": 9.0,
+    "subtree_pct": 8.0,
+    "n_rate": 10
+  },
+  "ToxDegree(circ)": {
+    "direct": 3.1,
+    "downstream": 4.7,
+    "elicit_pct": 12.2,
+    "subtree_pct": 11.5,
+    "n_rate": 10
+  },
+  "ToxSub-PR(circ)": {
+    "direct": 2.6,
+    "downstream": 2.6,
+    "elicit_pct": 16.4,
+    "subtree_pct": 14.2,
+    "n_rate": 7
+  },
+  "_base": {
+    "elicit_pct": 1.8,
+    "subtree_pct": 1.9
+  }
+}

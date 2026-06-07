@@ -1,0 +1,116 @@
+{
+  "T1_marginal_spearman": {
+    "n_subtree": 129,
+    "n_elicit": 112,
+    "n_all": 532,
+    "rho": {
+      "ToxicCount": {
+        "rho_subtree_rate": 0.257,
+        "rho_elicit_rate": 0.227,
+        "rho_downstream_cnt": 0.262
+      },
+      "Volume": {
+        "rho_subtree_rate": 0.353,
+        "rho_elicit_rate": 0.279,
+        "rho_downstream_cnt": 0.38
+      },
+      "ReplyBreadth": {
+        "rho_subtree_rate": 0.166,
+        "rho_elicit_rate": 0.042,
+        "rho_downstream_cnt": 0.413
+      },
+      "WtdDegree": {
+        "rho_subtree_rate": 0.192,
+        "rho_elicit_rate": 0.055,
+        "rho_downstream_cnt": 0.415
+      },
+      "PageRank": {
+        "rho_subtree_rate": 0.155,
+        "rho_elicit_rate": 0.071,
+        "rho_downstream_cnt": 0.34
+      }
+    }
+  },
+  "T2_within_stratum_subtree_rho": {
+    "tc=1": {
+      "n": 95,
+      "ReplyBreadth": 0.244,
+      "WtdDegree": 0.286,
+      "PageRank": 0.232,
+      "Volume": 0.264
+    },
+    "tc=2": {
+      "n": 23,
+      "ReplyBreadth": -0.137,
+      "WtdDegree": -0.177,
+      "PageRank": -0.148,
+      "Volume": 0.097
+    },
+    "tc>=3": {
+      "n": 11,
+      "ReplyBreadth": -0.124,
+      "WtdDegree": -0.265,
+      "PageRank": -0.261,
+      "Volume": 0.777
+    }
+  },
+  "T3_hybrids": {
+    "ToxicCount (plain)": {
+      "direct_cnt": 2.2,
+      "downstream_cnt": 2.3,
+      "elicit_rate": 0.073,
+      "subtree_rate": 0.071
+    },
+    "TC, tie-break breadth": {
+      "direct_cnt": 2.3,
+      "downstream_cnt": 2.4,
+      "elicit_rate": 0.072,
+      "subtree_rate": 0.07
+    },
+    "TC x log(1+breadth)": {
+      "direct_cnt": 2.4,
+      "downstream_cnt": 2.5,
+      "elicit_rate": 0.068,
+      "subtree_rate": 0.065
+    },
+    "breadth | tc>=2": {
+      "direct_cnt": 1,
+      "downstream_cnt": 1.1,
+      "elicit_rate": 0.038,
+      "subtree_rate": 0.035
+    },
+    "Volume (plain)": {
+      "direct_cnt": 2.6,
+      "downstream_cnt": 2.9,
+      "elicit_rate": 0.062,
+      "subtree_rate": 0.059
+    }
+  },
+  "T4_complementarity": {
+    "ReplyBreadth": {
+      "recall20_cnt": 0.35,
+      "recall20_rate": 0.0,
+      "union_with_TC_recall20_cnt": 0.5,
+      "union_with_TC_recall20_rate": 0.15,
+      "overlap_with_TC_top10": 1
+    },
+    "WtdDegree": {
+      "recall20_cnt": 0.3,
+      "recall20_rate": 0.0,
+      "union_with_TC_recall20_cnt": 0.45,
+      "union_with_TC_recall20_rate": 0.15,
+      "overlap_with_TC_top10": 1
+    },
+    "PageRank": {
+      "recall20_cnt": 0.2,
+      "recall20_rate": 0.0,
+      "union_with_TC_recall20_cnt": 0.35,
+      "union_with_TC_recall20_rate": 0.15,
+      "overlap_with_TC_top10": 1
+    },
+    "ToxicCount": {
+      "recall20_cnt": 0.2,
+      "recall20_rate": 0.15
+    }
+  }
+}
