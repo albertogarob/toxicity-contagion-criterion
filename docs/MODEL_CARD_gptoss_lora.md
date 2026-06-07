@@ -49,8 +49,10 @@ model = PeftModel.from_pretrained(model, "[hf-user]/[adapter-repo]")
 ```
 
 ## Availability, license, contact
-- The adapter weights are available from the authors on request, and/or at [HuggingFace URL].
-  They are not needed to reproduce the paper (see the note at the top).
+- The adapter weights are **available from the authors on request**. They are not needed to
+  reproduce the paper (see the note at the top), and the fine-tune is reproducible by anyone from
+  the public corpus + released script. (An optional `upload_adapter.py` is provided should the
+  authors later publish the weights on the HuggingFace Hub.)
 - Adapter license: [e.g. Apache-2.0 , confirm compatibility with the base model + training-corpus licenses].
 - Base model `openai/gpt-oss-20b` is under its own license; comply with it.
 - Contact: [email].
