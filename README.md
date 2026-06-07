@@ -1,5 +1,14 @@
 # Testing for Toxicity Contagion Before Applying Network Amplifier-Ranking Methods: A UK Reddit Case Study
 
+> ## 📣 Data is now available
+> **Reviewers, please note:** the submission form indicated that no data was available at
+> submission time. **That is now superseded , the data is available in this repository.** It
+> ships the **anonymized corpus** (pseudonym authors, no text), a **dehydrated id+label CSV**, and
+> the PII-free validation artifacts, so **every table and figure reproduces offline** with
+> `make reproduce` (no Reddit access, API key, or GPU needed). Raw comment text and real usernames
+> are not redistributed. See **[Data](#data--anonymized--dehydrated-release)** and
+> [`DATA_RELEASE.md`](DATA_RELEASE.md).
+
 Reproducibility repository for the paper submitted to the **IEEE ICDM 2026 Applied Track**.
 
 ## Overview
