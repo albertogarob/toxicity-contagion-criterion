@@ -147,10 +147,14 @@ deps with `uv pip install -e ".[labelling]"` and/or `".[finetune]"`. See
 [`toxicity_criterion/labelling/README.md`](toxicity_criterion/labelling/README.md).
 
 **GPT-OSS LoRA adapter (stratifier).** A LoRA adapter on `openai/gpt-oss-20b` was used only to
-define the validation strata (not the deployed labeller). Its model card is
-[`docs/MODEL_CARD_gptoss_lora.md`](docs/MODEL_CARD_gptoss_lora.md) and `upload_adapter.py` pushes
-it to the HuggingFace Hub. The adapter is trained on the corpus, so its upload is **gated on the
-same institutional approval as the data** (see `DATA_RELEASE.md`) and is not yet published.
+define the validation strata, **not** as the deployed labeller, and is **not required to
+reproduce the paper's results** (the strata it produced are already in
+`data/public/validation/validation_key.csv`; the deployed labels are Sonnet's). It was fine-tuned
+on a **public** HuggingFace hate-speech corpus (not the Reddit data), so the fine-tune is
+**reproducible by anyone with a GPU** from the released script + fixed hyperparameters + the
+public base model + that public corpus. See the model card
+[`docs/MODEL_CARD_gptoss_lora.md`](docs/MODEL_CARD_gptoss_lora.md); `upload_adapter.py` optionally
+publishes the trained weights to the HuggingFace Hub.
 
 ## Determinism and run parameters
 

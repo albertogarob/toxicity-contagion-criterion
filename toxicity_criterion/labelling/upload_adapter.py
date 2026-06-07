@@ -1,8 +1,10 @@
-"""Upload the GPT-OSS LoRA adapter to the HuggingFace Hub (gated; document-only).
+"""Upload the GPT-OSS LoRA adapter to the HuggingFace Hub (optional; document-only).
 
-The adapter is fine-tuned on the Reddit toxicity data, so its release is subject to the **same
-institutional ethics/DPO approval** as the corpus (see ``../../DATA_RELEASE.md``). Do not run this
-until that approval is in place.
+The adapter is fine-tuned on a **public** HuggingFace hate-speech corpus (not the Reddit data),
+so it is **not** subject to the Reddit-data ethics gate, and it is **not** required to reproduce
+the paper (the strata it produced are already shipped). Publishing it is a convenience; the
+fine-tune is reproducible by anyone from the released script + the public corpus. See the model
+card ``docs/MODEL_CARD_gptoss_lora.md``.
 
 Prerequisites:
   * the trained adapter directory (from ``finetune_gptoss.py``; default save dir
@@ -24,7 +26,7 @@ import os
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Upload the GPT-OSS LoRA adapter to the HF Hub (gated).")
+    ap = argparse.ArgumentParser(description="Upload the GPT-OSS LoRA adapter to the HF Hub (optional).")
     ap.add_argument("--adapter-dir", required=True, help="path to the trained adapter directory")
     ap.add_argument("--repo-id", required=True, help="target HF repo, e.g. user/gptoss-tox-lora")
     ap.add_argument("--private", action="store_true", help="create the repo as private")
@@ -37,7 +39,7 @@ def main() -> None:
             "output from finetune_gptoss.py."
         )
 
-    print("Reminder: release is gated on institutional ethics/DPO approval (see DATA_RELEASE.md).")
+    print("Note: the adapter is not required to reproduce the paper (see the model card).")
     if args.dry_run:
         print(
             f"[dry-run] would upload {args.adapter_dir} -> {args.repo_id} "
