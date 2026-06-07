@@ -33,7 +33,7 @@ All of these are excluded by `.gitignore`.
 
 1. `public/validation/panel_*.csv` + `validation_populations.json` , PII-free (sample_id + labels).
 2. `public/corpus_dehydrated.csv` , dehydrated corpus; reconstruct text locally with
-   `make rehydrate` (re-fetches by ID from the Reddit API; respects deletions).
+   `make rehydrate` (re-fetches by ID from Reddit's public .json endpoints; respects deletions).
 3. Full hydrated set (text + usernames) , by gated/dedicated access only; never committed.
 
 The dehydration / rehydration code (`../toxicity_criterion/labelling/build_dehydrated.py`,

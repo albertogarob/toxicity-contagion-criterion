@@ -3,8 +3,8 @@
 Reddit's API terms prohibit redistributing comment text, and the usernames are personal data.
 We therefore publish only what is needed to *rehydrate* the corpus, the comment id, its parent
 id, its subreddit, and our Sonnet toxic/non-toxic label, and a rehydration script
-(:mod:`toxicity_criterion.labelling.rehydrate`) that re-fetches the text by id from the public
-Reddit API. This honours deletions (removed comments do not come back) and ships no PII.
+(:mod:`toxicity_criterion.labelling.rehydrate`) that re-fetches the text by id from Reddit's public
+`.json` endpoints. This honours deletions (removed comments do not come back) and ships no PII.
 
 Inputs (PII; local only): the raw per-subreddit files (for the subreddit of each id) and the
 Sonnet label files. Output (PII-free; committed): ``data/public/corpus_dehydrated.csv``.

@@ -16,8 +16,10 @@ recommendation:
 > beats centrality and influence maximization on a reach-controlled validation.
 
 Corpus: 35,176 comments (after cleaning) from five UK subreddits
-(r/unitedkingdom, r/askuk, r/ukpolitics, r/ukvisa, r/skilledworkervisauk), collected via the
-public Reddit API (Nov–Dec 2025), labelled toxic/non-toxic (1.76% toxic).
+(r/unitedkingdom, r/askuk, r/ukpolitics, r/ukvisa, r/skilledworkervisauk), collected Nov–Dec 2025
+by querying Reddit's public per-subreddit comment listings (the unauthenticated `.json` web
+endpoints, e.g. `reddit.com/r/<sub>/comments.json`; not the official Reddit Data API), labelled
+toxic/non-toxic (1.76% toxic).
 
 ## Repository layout
 
@@ -76,7 +78,7 @@ the anonymized figures.
 
 The sharing **mechanism is already built** and will be enabled on approval: a dehydrated dataset
 (`build_dehydrated.py` -> `data/public/corpus_dehydrated.csv`) plus a rehydration script
-(`make rehydrate`) that re-fetches text by ID from the Reddit API and honours deletions. See
+(`make rehydrate`) that re-fetches text by ID from Reddit's public `.json` endpoints and honours deletions. See
 [`DATA_RELEASE.md`](DATA_RELEASE.md) (availability + ethics) and [`data/README.md`](data/README.md).
 
 > Reproducing the tables therefore currently requires access to the corpus from the authors

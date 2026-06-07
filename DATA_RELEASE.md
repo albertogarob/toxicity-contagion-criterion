@@ -47,8 +47,8 @@ increasing exposure by un-ignoring the relevant paths:
 ## The prepared sharing mechanism (dehydration / rehydration)
 
 When approved, the intended public form is a **dehydrated** dataset (comment IDs + reply
-structure + toxic/non-toxic labels, no text, no usernames), reconstructed locally via the public
-Reddit API:
+structure + toxic/non-toxic labels, no text, no usernames), reconstructed locally from Reddit's public
+`.json` endpoints:
 
 ```bash
 # AUTHORS, once approved: build the dehydrated file (PII-free) and un-ignore it

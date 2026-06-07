@@ -16,7 +16,7 @@ The corpus is shared **dehydrated** (IDs + labels, no text/usernames); see `../.
 
 - `build_dehydrated.py` , (authors only) build `data/public/corpus_dehydrated.csv` from the
   local raw + Sonnet-label files. Output is PII-free and committed.
-- `rehydrate.py` , (anyone) re-fetch comment text by ID from the public Reddit API and
+- `rehydrate.py` , (anyone) re-fetch comment text by ID from Reddit's public .json endpoints and
   reconstruct `data/derived/*_sonnet.jsonl` + `data/raw/reddit/*.jsonl`. Needs `requests`
   (`uv pip install -e ".[labelling]"`). Run via `make rehydrate`. Deletions are respected.
 
