@@ -3,18 +3,17 @@
 This document is the repository's answer to **ML Reproducibility Checklist v2.0, item 9**
 (downloadable dataset / simulation environment).
 
-## Status: approved , anonymized + dehydrated data released
+## Status: available
 
-The institutional review (the Netherlands coauthors' university privacy officer / DPO and
-research-ethics committee) **cleared** sharing the anonymized and dehydrated data and the
-derivative artifacts. The repository now ships everything needed to **reproduce every result
-offline (no Reddit calls)**, while publishing **no comment text and no real usernames**.
+The repository ships the anonymized and dehydrated data and all derivative artifacts needed to
+**reproduce every result offline (no Reddit calls)**, while publishing **no comment text and no
+real usernames**. We do not redistribute the raw comment **text** or **real usernames** (Reddit's
+terms + user privacy); only anonymized, text-free derivatives and dehydrated IDs are shared.
 
-We still do **not** redistribute the raw comment **text** or **real usernames** (Reddit's terms
-+ privacy). The corpus was collected by querying Reddit's public per-subreddit `.json` web
-endpoints (not the official Data API); the released artifacts contain neither text nor usernames.
+The corpus was collected by querying Reddit's public per-subreddit `.json` web endpoints (not the
+official Data API); the released artifacts contain neither text nor usernames.
 
-## What IS shared (committed, PII-free)
+## What IS shared (PII-free)
 
 | Released | Path | Contents |
 |---|---|---|
@@ -48,7 +47,7 @@ is dropped entirely (no analysis uses it). Regenerate the public release from pr
 
 | Withheld | Why | How to obtain |
 |---|---|---|
-| Raw comment **text** (`data/raw/`) | Reddit terms + privacy | `make rehydrate` re-fetches by ID from Reddit's public `.json` endpoints |
+| Raw comment **text** (`data/raw/`) | not redistributed (Reddit terms + privacy) | `make rehydrate` re-fetches by ID from Reddit's public `.json` endpoints |
 | Real **usernames** (`data/derived/*_sonnet.jsonl`) | personal data | recovered into your local copy by rehydration; never shipped by us |
 | Real re-identification key (`orig_id`/`author` in the validation key) | links `sample_id` -> a person | not released |
 
@@ -62,9 +61,9 @@ make rehydrate     # re-fetch text by ID -> data/derived/ + data/raw/ (real text
 ```
 
 Rehydration **respects deletions** (removed comments are not recoverable), so it cannot resurrect
-content a user has since deleted; this is a deliberate privacy property.
+content a user has since deleted.
 
-## Ethics statement
+## Responsible use
 
 The released data attaches a `toxic`/`non-toxic` label to (pseudonymous) public comments.
 
@@ -74,8 +73,7 @@ The released data attaches a `toxic`/`non-toxic` label to (pseudonymous) public 
   precision ~ 0.92, recall reported as a range), not ground truth, and must not be treated as
   authoritative judgements about any individual. See `docs/ANNOTATION_GUIDELINES.md`.
 - **Right to erasure.** Rehydration respects deletions; a removed comment cannot be recovered.
-- **Takedown.** The authors will remove specific IDs from the released files on a reasonable
-  request: [contact].
+- **Takedown.** The authors will remove specific IDs from the released files on request: [contact].
 - **Intended use.** Research on moderation methodology only; not for profiling, enforcement
   against individuals, or any use that re-identifies or targets users.
 

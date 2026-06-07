@@ -70,8 +70,7 @@ make lint           # ruff + black --check
 ## Data , anonymized + dehydrated release
 
 The repository ships the data needed to **reproduce every result offline** while publishing
-**no comment text and no real usernames** (cleared by the Netherlands coauthors' institutional
-ethics/DPO review):
+**no comment text and no real usernames**:
 
 - **Anonymized corpus** (`data/public/corpus/`): `id, parent_id, subreddit, pseudonym-author,
   label` , no text. A deterministic username bijection makes the reply graph isomorphic to the
